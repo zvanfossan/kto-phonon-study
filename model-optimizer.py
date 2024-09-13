@@ -75,31 +75,24 @@ def split_data_and_scale(feature_matrix, target, random):
     return X_train, X_test, y_train, y_test, X_train_scaled, X_test_scaled
 
 
-def grid_search():
-    return
+def grid_search(max_depth, min_samples_leaf, min_weight_fraction_leaf,n_folds):
 
-#Perform grid search with cross validation to determine optimal hyperparameters
-max_depth = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-min_samples_leaf = [1,2,3,4,5,6,7,8,9,10]
-min_weight_fraction_leaf = [0,0.1,0.2,0.3,0.4,0.5]
-
-n_folds = 10
-
-grid_search_dict = {}
-for j in max_depth:
-    grid_search_dict[j] = {}
-    for k in min_samples_leaf:
-        grid_search_dict[j][k] = {}
-        for l in min_weight_fraction_leaf:
-            grid_search_dict[j][k][l] = {}
-            training_rmse, training_std = [], []
-            validation_rmse, validation_std = [], []
-            model = DecisionTreeRegressor(max_depth=j,
-                                            min_samples_leaf=k,
-                                            min_weight_fraction_leaf=l,
-                                            random_state=seed)
-            #cv_scores = run_cv(n_folds=n_folds,
-            #                    model=model,
-            #                    X_train=X_train_scaled,
-            #                    y_train=y_train)
-            #grid_search_dict[j][k][l] = cv_scores
+    grid_search_dict = {}
+    for j in max_depth:
+        grid_search_dict[j] = {}
+        for k in min_samples_leaf:
+            grid_search_dict[j][k] = {}
+            for l in min_weight_fraction_leaf:
+                grid_search_dict[j][k][l] = {}
+                training_rmse, training_std = [], []
+                validation_rmse, validation_std = [], []
+                model = DecisionTreeRegressor(max_depth=j,
+                                                min_samples_leaf=k,
+                                                min_weight_fraction_leaf=l,
+                                                random_state=seed)
+                cv_scores = run_cv(n_folds=n_folds,
+                                    model=model,
+                                    X_train=split_data_and_scale[4],
+                                    y_train=split_data_and_scale[0])
+                grid_search_dict[j][k][l] = cv_scores
+    return grid_search_dict
