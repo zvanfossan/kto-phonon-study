@@ -1,6 +1,7 @@
 import os, json
 import numpy as np
 from sklearn.model_selection import train_test_split, KFold, StratifiedKFold
+from sklearn import preprocessing
 from sklearn.tree import DecisionTreeRegressor
 seed = np.random.seed(10)
 
@@ -59,6 +60,23 @@ def run_cv(n_folds, model, X_train, y_train, stratify=False):
 
     return {'train' : train_scores,
            'val' : val_scores}
+
+
+def split_data_and_scale(feature_matrix, target, random):
+    """Split the feature and target matrices into training and testing data sets.
+        Scale the training set."""
+    #Split data into test and train sets
+    X_train, X_test, y_train, y_test = train_test_split(feature_matrix, target, test_size=0.25, random_state=random)
+
+    #Scale the training set data and transform both the training set and test set
+    scaler = preprocessing.StandardScaler().fit(X_train)  
+    X_train_scaled = scaler.transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    return X_train, X_test, y_train, y_test, X_train_scaled, X_test_scaled
+
+
+def grid_search():
+    return
 
 #Perform grid search with cross validation to determine optimal hyperparameters
 max_depth = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
