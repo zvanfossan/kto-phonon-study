@@ -1,7 +1,0 @@
-,irrep order parameter features,irrep order parameter feature importances (RMSE),strain tensor component features,strain tensor component feature importances (RMSE),octahedron structure metric features,octahedron structure metric feature importances (RMSE)
-0,$e_{1}$,3788.6702787017384,$\epsilon_{xx}$,7465.365872577405,BAV,607.5577520192226
-1,$e_{2}$,7253.576031191633,$\epsilon_{yy}$,7726.411887594013,DI,6881.227544056982
-2,$e_{3}$,1122.6314277426268,$\epsilon_{zz}$,7748.375732975002,L,4872.799238023641
-3,$e_{4}$,6.081175647396913,$\epsilon_{xy}$,14.281128257686424,,
-4,$e_{5}$,9.844969878,$\epsilon_{xz}$,20.863910950874818,,
-5,$e_{6}$,14.012013016385755,$\epsilon_{yz}$,20.40658547635606,,
